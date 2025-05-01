@@ -1,0 +1,3 @@
+/home/rey/7_semester/number_methods/lapack_example/cmake-build-debug/CMakeFiles/Lapack.dir
+/home/rey/7_semester/number_methods/lapack_example/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/rey/7_semester/number_methods/lapack_example/cmake-build-debug/CMakeFiles/rebuild_cache.dir

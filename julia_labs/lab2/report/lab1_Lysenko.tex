@@ -1,0 +1,463 @@
+\documentclass[a4paper, 14pt]{extarticle}
+
+% Поля
+%--------------------------------------
+\usepackage{geometry}
+\geometry{a4paper,tmargin=2cm,bmargin=2cm,lmargin=3cm,rmargin=1cm}
+%--------------------------------------
+
+
+%Russian-specific packages
+%--------------------------------------
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc} 
+\usepackage[english, main=russian]{babel}
+%--------------------------------------
+
+\usepackage{textcomp}
+
+% Красная строка
+%--------------------------------------
+\usepackage{indentfirst}               
+%--------------------------------------             
+
+
+%Graphics
+%--------------------------------------
+\usepackage{graphicx}
+\graphicspath{ {./images/} }
+\usepackage{wrapfig}
+%--------------------------------------
+
+% Полуторный интервал
+%--------------------------------------
+\linespread{1.3}                    
+%--------------------------------------
+
+%Выравнивание и переносы
+%--------------------------------------
+% Избавляемся от переполнений
+\sloppy
+% Запрещаем разрыв страницы после первой строки абзаца
+\clubpenalty=10000
+% Запрещаем разрыв страницы после последней строки абзаца
+\widowpenalty=10000
+%--------------------------------------
+
+%Списки
+\usepackage{enumitem}
+
+%Подписи
+\usepackage{caption} 
+
+%Гиперссылки
+\usepackage{hyperref}
+
+\hypersetup {
+	unicode=true
+}
+
+%Рисунки
+%--------------------------------------
+\DeclareCaptionLabelSeparator*{emdash}{~--- }
+\captionsetup[figure]{labelsep=emdash,font=onehalfspacing,position=bottom}
+%--------------------------------------
+
+\usepackage{tempora}
+\usepackage{amsmath}
+\usepackage{color}
+\usepackage{listings}
+\lstset{
+  belowcaptionskip=1\baselineskip,
+  breaklines=true,
+  frame=L,
+  xleftmargin=\parindent,
+  language=Python,
+  showstringspaces=false,
+  basicstyle=\footnotesize\ttfamily,
+  keywordstyle=\bfseries\color{blue},
+  commentstyle=\itshape\color{purple},
+  identifierstyle=\color{black},
+  stringstyle=\color{red},
+}
+
+%--------------------------------------
+%			НАЧАЛО ДОКУМЕНТА
+%--------------------------------------
+
+\begin{document}
+
+%--------------------------------------
+%			ТИТУЛЬНЫЙ ЛИСТ
+%--------------------------------------
+\begin{titlepage}
+\thispagestyle{empty}
+\newpage
+
+
+%Шапка титульного листа
+%--------------------------------------
+\vspace*{-60pt}
+\hspace{-65pt}
+\begin{minipage}{0.3\textwidth}
+\hspace*{-20pt}\centering
+\includegraphics[width=\textwidth]{emblem}
+\end{minipage}
+\begin{minipage}{0.67\textwidth}\small \textbf{
+\vspace*{-0.7ex}
+\hspace*{-6pt}\centerline{Министерство науки и высшего образования Российской Федерации}
+\vspace*{-0.7ex}
+\centerline{Федеральное государственное бюджетное образовательное учреждение }
+\vspace*{-0.7ex}
+\centerline{высшего образования}
+\vspace*{-0.7ex}
+\centerline{<<Московский государственный технический университет}
+\vspace*{-0.7ex}
+\centerline{имени Н.Э. Баумана}
+\vspace*{-0.7ex}
+\centerline{(национальный исследовательский университет)>>}
+\vspace*{-0.7ex}
+\centerline{(МГТУ им. Н.Э. Баумана)}}
+\end{minipage}
+%--------------------------------------
+
+%Полосы
+%--------------------------------------
+\vspace{-25pt}
+\hspace{-35pt}\rule{\textwidth}{2.3pt}
+
+\vspace*{-20.3pt}
+\hspace{-35pt}\rule{\textwidth}{0.4pt}
+%--------------------------------------
+
+\vspace{1.5ex}
+\hspace{-35pt} \noindent \small ФАКУЛЬТЕТ\hspace{80pt} <<Информатика и системы управления>>
+
+\vspace*{-16pt}
+\hspace{47pt}\rule{0.83\textwidth}{0.4pt}
+
+\vspace{0.5ex}
+\hspace{-35pt} \noindent \small КАФЕДРА\hspace{50pt} <<Теоретическая информатика и компьютерные технологии>>
+
+\vspace*{-16pt}
+\hspace{30pt}\rule{0.866\textwidth}{0.4pt}
+  
+\vspace{11em}
+
+\begin{center}
+\Large {\bf Лабораторная работа № 2} \\ 
+\large {\bf по курсу <<Реализация метода Гаусса c перестановками>>} \\ 
+\large {\bf по курсу <<Численные методы линейной алгебры>>} \\ 
+\end{center}\normalsize
+
+\vspace{8em}
+
+
+\begin{flushright}
+  {Студент группы ИУ9-71Б Лысенко В. В.\hspace*{15pt} \\
+  \vspace{2ex}
+  Преподаватель Посевин Д. П.\hspace*{15pt}}
+\end{flushright}
+
+\bigskip
+
+\vfill
+ 
+
+\begin{center}
+\textsl{Москва 2024}
+\end{center}
+\end{titlepage}
+%--------------------------------------
+%		КОНЕЦ ТИТУЛЬНОГО ЛИСТА
+%--------------------------------------
+
+\renewcommand{\ttdefault}{pcr}
+
+\setlength{\tabcolsep}{3pt}
+\newpage
+\setcounter{page}{2}
+
+\section{Цель работы}\label{Sect::task}
+\par
+\renewcommand{\labelenumii}{\arabic{enumi}.\arabic{enumii}.}
+Реализовать три варианта метода Гаусса с перестановками и научиться оценивать погрешность решения системы линейных уравнений для матриц произвольной размерности.
+
+\section{Задачи}\label{Sect::task}
+\par
+\renewcommand{\labelenumii}{\arabic{enumi}.\arabic{enumii}.}
+\begin{enumerate} 
+    \item Реализовать метод Гаусса с перестановками по столбцам, по строкам, по столбцам и строкам одновременно для действительных квадратных матриц произвольной размерности n. 
+    \item Для проверки работоспособности алгоритмов необходимо использовать алгоритм тестирования, который заключался в том, что мы заведомо определяем значения координат вектора x, данный вектор является решением уравнения A·х = b; вычисляем b путем прямого перемножения матрицы A на вектор x и далее производим поиск решения уравнения A·х = b тем или иным методом Гаусса,  получая x(числ), после чего производим сравнение полученного  x(числ) c заданным x, а также решением x(библ), полученным с использованием сторонней библиотеки выбранной студеном. При этом сравнение производится по Евклидовой норме разности вектора x-x(числ) и x-x(библ).
+    \item На защите лабораторной работы студент должен показать умение оценивать погрешность вычислений в зависимости от выполнения  условия диагонального преобладания матрицы, умение сравнивать погрешности вычислений полученных методом Гаусса с перестановками по столбцам, по строкам, по столбцам и строкам одновременно. Понимать связь теории с практикой.
+    \item Результат работы должен быть представлен в виде графиков зависимости абсолютной погрешности вычислений классическим методом Гаусса, методом Гаусса с перестановками по строкам, методом Гаусса с перестановками по столбцам, методом Гаусса с перестановками по столбцам и строкам, библиотечным методом от степени диагонального преобладания. Все графики должны быть построены на одной координатной плоскости. Напомним, что погрешность вычисления вектора x системы линейных алгебраических уравнений A·x=b тем или иным способом рассчитывается по Евклидовой норме разности точного решения и решения полученного соответствующим методом. Степень диагонального преобладания вычисляется, как максимальная разность по i между модулем диагонального элемента и суммы модулей вне диагональных элементов. Очевидно, что если значение степени диагонального преобладания положительна, то условие диагонального преобладания выполняется, в противном случае — не выполняется. Поэтому график должен быть построен как для отрицательных значений  степени диагонального преобладания, так и для положительных.
+\end{enumerate}
+
+\pagebreak
+\section{Практическая реализация}
+\par
+В отчёте представлен вариант для квадратной матрицы размером 130х130 и амплитудой значений [-10000:10000]. В качестве заведомого известного вектора х был взят единичный вектор и посчитан ветор F. На основе матрицы А и вектора F с помощью различных методов был вычислен вектор Х. В результате посчитаны погрешности вычислений для классического метода Гаусса, метода строк, метода столбцов и комбинированного метода с различными коэффициентами диагонального преобладания.
+
+Ниже представлен код программы:
+\begin{lstlisting}
+using Plots
+
+n = 130
+cup = 10000
+
+function gauss_classic(A, F)
+    for k in 1:n-1 
+        for i in k+1:n
+            dif = A[i,k]
+            #A[i, :] ./= dif
+            F[i] /= dif
+            
+            #A[i, :] .*= A[k, k]
+            F[i] *= A[k, k]
+            
+            #A[i, :] .-= A[k, :]
+            F[i] -= F[k]
+            A[i, :] .= A[i,:] ./ dif .* A[k, k] .- A[k, :] 
+            #F[i:n] .= F[i:n] ./ dif .*  A[k, k] .- F[k]
+        end
+   end
+
+    X = ones(Float64, n)
+    X[n] = F[n] / A[n,n]
+    for i in n-1:-1:1
+        dif = 0.0
+        for j in i+1:n
+            dif += A[i,j] * X[j]
+        end
+        X[i] = (F[i] - dif) / A[i, i]
+    end
+    return X
+end
+
+##строки
+function gauss_strings(A, F)
+    for k in 1:n-1
+        max_i = k
+        max_val = 0.0
+        for i in k:n
+            if (abs(max_val)) < abs(A[i,k]) 
+                max_val = A[i,k]
+                max_i = i
+            end
+        end
+    
+    
+        A[k, :], A[max_i, :] = A[max_i, :], A[k, :]
+        F[k], F[max_i] = F[max_i], F[k]
+
+        
+        for i in k+1:n
+            dif = A[i,k]
+            #A[i, :] ./= dif
+            F[i] /= dif
+            
+            #A[i, :] .*= A[k, k]
+            F[i] *= A[k, k]
+            
+            #A[i, :] .-= A[k, :]
+            F[i] -= F[k]
+            A[i, :] .= A[i,:] ./ dif .* A[k, k] .- A[k, :] 
+            #F[i:n] .= F[i:n] ./ dif .*  A[k, k] .- F[k]
+        end
+   end
+
+    X = ones(Float64, n)
+    X[n] = F[n] / A[n,n]
+    for i in n-1:-1:1
+        dif = 0.0
+        for j in i+1:n
+            dif += A[i,j] * X[j]
+        end
+        X[i] = (F[i] - dif) / A[i, i]
+    end
+    return X
+        
+end
+
+#столбцы
+function gauss_cols(A, F)
+    
+    for k in 1:n-1
+        max_i = k
+        max_val = 0.0
+        for i in k:n
+            if (abs(max_val)) < abs(A[k,i]) 
+                max_val = A[k,i]
+                max_i = i
+            end
+        end
+
+        A[:, k], A[:, max_i] = A[:, max_i], A[:, k]
+
+        for i in k+1:n
+            dif = A[i,k]
+            #A[i, :] ./= dif
+            F[i] /= dif
+            
+            #A[i, :] .*= A[k, k]
+            F[i] *= A[k, k]
+            
+            #A[i, :] .-= A[k, :]
+            F[i] -= F[k]
+            A[i, :] .= A[i,:] ./ dif .* A[k, k] .- A[k, :] 
+            #F[i:n] .= F[i:n] ./ dif .*  A[k, k] .- F[k]
+        end        
+    end
+
+    X = ones(Float64, n)
+    X[n] = F[n] / A[n,n]
+    for i in n-1:-1:1
+        dif = 0.0
+        for j in i+1:n
+            dif += A[i,j] * X[j]
+        end
+        X[i] = (F[i] - dif) / A[i, i]
+    end
+    return X
+        
+end
+
+
+##стркои и столбцы
+function gauss_sting_and_cols(A, F)
+    for k in 1:n-1
+        max_i = k
+        max_val = 0.0
+        for i in k:n
+            if (abs(max_val)) < abs(A[i,k]) 
+                max_val = A[i,k]
+                max_i = i
+            end
+        end
+    
+        A[k, :], A[max_i, :] = A[max_i, :], A[k, :]
+        F[k], F[max_i] = F[max_i], F[k]
+
+        max_i = k
+        max_val = 0.0
+        for i in k:n
+            if (abs(max_val)) < abs(A[k,i]) 
+                max_val = A[k,i]
+                max_i = i
+            end
+        end
+
+        A[:, k], A[:, max_i] = A[:, max_i], A[:, k]
+
+        
+        for i in k+1:n
+            dif = A[i,k]
+            #A[i, :] ./= dif
+            F[i] /= dif
+            
+            #A[i, :] .*= A[k, k]
+            F[i] *= A[k, k]
+            
+            #A[i, :] .-= A[k, :]
+            F[i] -= F[k]
+            A[i, :] .= A[i,:] ./ dif .* A[k, k] .- A[k, :] 
+            #F[i:n] .= F[i:n] ./ dif .*  A[k, k] .- F[k]
+        end  
+    end
+    X = ones(Float64, n)
+    X[n] = F[n] / A[n,n]
+    for i in n-1:-1:1
+        dif = 0.0
+        for j in i+1:n
+            dif += A[i,j] * X[j]
+        end
+        X[i] = (F[i] - dif) / A[i, i]
+    end
+    return X
+        
+end
+
+function norm(x)
+    sum = 0.0
+    for element in x
+        sum += element^2
+    end
+    return sqrt(sum)
+end
+
+
+
+X = ones(Float64, n)
+#X .= 10
+A = rand(-cup:cup, n, n)
+A = Float64.(A)
+
+
+F = [Float64(x) for x in (A * X)]
+
+X0 = gauss_classic(copy(A), copy(F))
+X1 = gauss_strings(copy(A), copy(F))
+X2 = gauss_cols(copy(A), copy(F))
+X3 = gauss_sting_and_cols(copy(A), copy(F))
+
+
+println("Погрешность при классическом методе Гаусса: ", norm(X - X0))
+println("Погрешность при методе строк: ", norm(X - X1))
+println("Погрешность при методе столбцов: ", norm(X - X2))
+println("Погрешность при комбинированном методе: ", norm(X - X3))
+
+gauss_classic_array = Vector{Float64}()
+gauss_strings_array = Vector{Float64}()
+gauss_cols_array = Vector{Float64}()
+gauss_sting_and_cols_array = Vector{Float64}()
+diag_coefs = Vector{Float64}()
+
+
+
+for diagonal_increase_coef in 0:22
+    push!(diag_coefs, diagonal_increase_coef)
+    cool_A = copy(A[1:n, 1:n])
+
+    for i in 1:n
+        if cool_A[i, i] == 0.0
+            cool_A[i, i] += 1
+        end
+        cool_A[i, i] += 2^diagonal_increase_coef * sign(cool_A[i, i] )
+    end
+
+    F1 = [Float64(x) for x in (cool_A * X)]
+
+    
+    push!(gauss_classic_array, norm(X - gauss_classic(copy(cool_A), copy(F1))))
+    push!(gauss_strings_array, norm(X - gauss_strings(copy(cool_A), copy(F1))))
+    push!(gauss_cols_array, norm(X - gauss_cols(copy(cool_A), copy(F1))))
+    push!(gauss_sting_and_cols_array, norm(X - gauss_sting_and_cols(copy(cool_A), copy(F1))))
+    
+
+end
+
+
+
+plot(diag_coefs, gauss_classic_array, label="Classic", xlabel="Diagonal coef", ylabel="Error")
+plot!(diag_coefs, gauss_strings_array, label="Strings", color=:red)
+plot!(diag_coefs, gauss_cols_array, label="Columns", color=:yellow)
+plot!(diag_coefs, gauss_sting_and_cols_array, label="Combination", color=:green)
+\end{lstlisting}
+
+\section{Результаты}
+\par
+Результат для матрицы с нулевым коэффициентом диагонального преобладания:
+\begin{center}
+\includegraphics[scale=0.75]{g1}
+\par
+\end{center}
+
+Результаты вычислений различных методов с наращиванием коэффициента диагонального преобладания:
+\begin{center}
+\includegraphics[scale=0.75]{g2}
+\par
+\end{center}
+
+\section{Выводы}
+В ходе выполнения лаборатороной работы были реализованы три варианта метода Гаусса с перестановками и посчитаны погрешности решения системы линейных уравнений для матриц произвольной размерности. В сравнении с остальными методами классический метод Гаусса оказался гараздо менее точным. Наиболее надёжным же оказался комбинарованный метод.
+\end{document}

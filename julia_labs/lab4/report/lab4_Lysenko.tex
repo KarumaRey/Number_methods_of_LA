@@ -1,0 +1,399 @@
+\UseRawInputEncoding
+\documentclass[a4paper, 14pt]{extarticle}
+
+% Поля
+%--------------------------------------
+\usepackage{geometry}
+\geometry{a4paper,tmargin=2cm,bmargin=2cm,lmargin=3cm,rmargin=1cm}
+%--------------------------------------
+
+
+%Russian-specific packages
+%--------------------------------------
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc} 
+\usepackage[english, main=russian]{babel}
+%--------------------------------------
+
+\usepackage{textcomp}
+
+% Красная строка
+%--------------------------------------
+\usepackage{indentfirst}               
+%--------------------------------------             
+
+
+%Graphics
+%--------------------------------------
+\usepackage{graphicx}
+\graphicspath{ {./images/} }
+\usepackage{wrapfig}
+%--------------------------------------
+
+% Полуторный интервал
+%--------------------------------------
+\linespread{1.3}                    
+%--------------------------------------
+
+%Выравнивание и переносы
+%--------------------------------------
+% Избавляемся от переполнений
+\sloppy
+% Запрещаем разрыв страницы после первой строки абзаца
+\clubpenalty=10000
+% Запрещаем разрыв страницы после последней строки абзаца
+\widowpenalty=10000
+%--------------------------------------
+
+%Списки
+\usepackage{enumitem}
+
+%Подписи
+\usepackage{caption} 
+
+%Гиперссылки
+\usepackage{hyperref}
+
+\hypersetup {
+	unicode=true
+}
+
+%Рисунки
+%--------------------------------------
+\DeclareCaptionLabelSeparator*{emdash}{~--- }
+\captionsetup[figure]{labelsep=emdash,font=onehalfspacing,position=bottom}
+%--------------------------------------
+
+\usepackage{tempora}
+\usepackage{amsmath}
+\usepackage{color}
+\usepackage{listings}
+\lstset{
+  belowcaptionskip=1\baselineskip,
+  breaklines=true,
+  frame=L,
+  xleftmargin=\parindent,
+  language=Python,
+  showstringspaces=false,
+  basicstyle=\footnotesize\ttfamily,
+  keywordstyle=\bfseries\color{blue},
+  commentstyle=\itshape\color{purple},
+  identifierstyle=\color{black},
+  stringstyle=\color{red},
+  extendedchars=\true,
+}
+
+%--------------------------------------
+%			НАЧАЛО ДОКУМЕНТА
+%--------------------------------------
+
+\begin{document}
+
+%--------------------------------------
+%			ТИТУЛЬНЫЙ ЛИСТ
+%--------------------------------------
+\begin{titlepage}
+\thispagestyle{empty}
+\newpage
+
+
+%Шапка титульного листа
+%--------------------------------------
+\vspace*{-60pt}
+\hspace{-65pt}
+\begin{minipage}{0.3\textwidth}
+\hspace*{-20pt}\centering
+\includegraphics[width=\textwidth]{emblem}
+\end{minipage}
+\begin{minipage}{0.67\textwidth}\small \textbf{
+\vspace*{-0.7ex}
+\hspace*{-6pt}\centerline{Министерство науки и высшего образования Российской Федерации}
+\vspace*{-0.7ex}
+\centerline{Федеральное государственное бюджетное образовательное учреждение }
+\vspace*{-0.7ex}
+\centerline{высшего образования}
+\vspace*{-0.7ex}
+\centerline{<<Московский государственный технический университет}
+\vspace*{-0.7ex}
+\centerline{имени Н.Э. Баумана}
+\vspace*{-0.7ex}
+\centerline{(национальный исследовательский университет)>>}
+\vspace*{-0.7ex}
+\centerline{(МГТУ им. Н.Э. Баумана)}}
+\end{minipage}
+%--------------------------------------
+
+%Полосы
+%--------------------------------------
+\vspace{-25pt}
+\hspace{-35pt}\rule{\textwidth}{2.3pt}
+
+\vspace*{-20.3pt}
+\hspace{-35pt}\rule{\textwidth}{0.4pt}
+%--------------------------------------
+
+\vspace{1.5ex}
+\hspace{-35pt} \noindent \small ФАКУЛЬТЕТ\hspace{80pt} <<Информатика и системы управления>>
+
+\vspace*{-16pt}
+\hspace{47pt}\rule{0.83\textwidth}{0.4pt}
+
+\vspace{0.5ex}
+\hspace{-35pt} \noindent \small КАФЕДРА\hspace{50pt} <<Теоретическая информатика и компьютерные технологии>>
+
+\vspace*{-16pt}
+\hspace{30pt}\rule{0.866\textwidth}{0.4pt}
+  
+\vspace{11em}
+
+\begin{center}
+\Large {\bf Лабораторная работа № 4} \\ 
+\large {\bf<<Вычисление собственных значений и собственных векторов симметричной матрицы методом А.М. Данилевского>>} \\ 
+\large {\bf по курсу <<Численные методы линейной алгебры>>} \\ 
+\end{center}\normalsize
+
+\vspace{8em}
+
+
+\begin{flushright}
+  {Студент группы ИУ9-71Б Лысенко В. В.\hspace*{15pt} \\
+  \vspace{2ex}
+  Преподаватель Посевин Д. П.\hspace*{15pt}}
+\end{flushright}
+
+\bigskip
+
+\vfill
+ 
+
+\begin{center}
+\textsl{Москва 2024}
+\end{center}
+\end{titlepage}
+%--------------------------------------
+%		КОНЕЦ ТИТУЛЬНОГО ЛИСТА
+%--------------------------------------
+
+\renewcommand{\ttdefault}{pcr}
+
+\setlength{\tabcolsep}{3pt}
+\newpage
+\setcounter{page}{2}
+
+\section{Цель работы}\label{Sect::task}
+\par
+\renewcommand{\labelenumii}{\arabic{enumi}.\arabic{enumii}.}
+Реализовать метод вычисления собственных значений и собственных векторов симметричной матрицы методом А.М. Данилевского.
+
+\section{Задачи}\label{Sect::task}
+\par
+\renewcommand{\labelenumii}{\arabic{enumi}.\arabic{enumii}.}
+\begin{enumerate} 
+    \item Реализовать метод вычисления собственных значений и собственных векторов симметричной матрицы методом А.М. Данилевского.
+    \item Реализовать метод поиска собственных значений действительной симметричной матрицы A размером 4х4.
+    \item Проверить корректность вычисления собственных значений по теореме Виета.
+    \item Проверить выполнение условий теоремы Гершгорина о принадлежности собственных значений соответствующим объединениям кругов Гершгорина.
+    \item Вычислить собственные вектора и проверить выполнение условия ортогональности собственных векторов.
+    \item Проверить решение на матрице приведенной в презентации.
+    \item Продемонстрировать работу приложения для произвольных симметричных матриц размером n х n с учетом выполнения пунктов приведенных выше.
+\end{enumerate}
+
+\pagebreak
+\section{Практическая реализация}
+\par
+
+Ниже представлен код программы:
+\begin{lstlisting}
+using Random
+using LinearAlgebra
+using Symbolics
+using Polynomials
+
+eps = 1e-10
+
+function generate_symmetric_matrix(n)
+    A = rand(Float64, n, n)
+    for i in 1:n
+        for j in i+1:n
+            A[i,j] = A[j, i]
+        end
+    end  
+    return A
+end
+
+function roots_for_Daniel(coefficients)
+    x = -reverse(coefficients)
+    append!(x, 1)
+    p = Polynomial(x)
+    
+    return roots(p)
+end
+
+
+function danilevsky_method(A)
+    n = size(A, 1)
+    lambda_values = Vector{Float64}()
+    lambda_vectors = Vector{Vector{Float64}}()
+    main_B = I(n)
+
+    B = A
+
+    for k in 1:n-1
+        B = zeros(Float64, n, n)
+        for i in 1:n
+            B[i,i] = 1.0
+        end
+        for j in 1:n
+            B[n-k,j] = - A[n+1-k,j] / A[n+1-k, n-k]
+            if j==n-k
+                B[n-k,j] = 1 / A[n+1-k, n-k]
+            end
+        end
+        
+        A = inv(B) * A * B
+
+        main_B *= B        
+    end
+
+    lambda_values = roots_for_Daniel(A[1, :])
+    
+    for val in lambda_values
+        my_vector = Vector{Float64}()
+        for i in 0:n-1
+            push!(my_vector, val^i)
+        end
+        
+        my_vector = main_B * reverse(my_vector)
+        
+        push!(lambda_vectors, my_vector / norm(my_vector))
+    end
+    return lambda_values, lambda_vectors
+end
+
+function check_viete(lambda_values, A)
+    trace_A = tr(A)
+    det_A = det(A)
+    sum_lambda_values = sum(lambda_values)
+    product_lambda_values = prod(lambda_values)
+
+    if isapprox(sum_lambda_values, trace_A) && isapprox(product_lambda_values, det_A)
+        println("Проверка теоремы Виета пройдена")
+    else
+        println("Проверка теоремы Виета НЕ пройдена")
+    end
+end
+
+function check_gershgorin(lambda_values, A)
+    n = size(A, 1)
+    is_valid = true
+
+    for i in 1:n
+        row_sum = sum(abs.(A[i, :])) - abs(A[i, i])
+        if abs(lambda_values[i] - A[i, i]) > row_sum
+            is_valid = false
+        end
+    end
+
+    if is_valid
+        println("Проверка кругов Гершгорина пройдена")
+    else
+        println("Проверка кругов Гершгорина НЕ пройдена")
+    end
+end
+
+
+function are_orthogonal(vectors)
+    n = size(vectors, 1)
+
+    is_ortagonal = true
+    for i in 1:n
+        for j in 1:n
+            if i != j
+                dot_product = dot(vectors[i], vectors[j])
+                if eps > dot_product
+                    dot_product = 0
+                end
+                is_ortagonal = isapprox(dot_product, 0)
+            end
+            if !is_ortagonal
+                break
+            end
+        end
+        if !is_ortagonal
+            break   
+        end
+    end
+
+    if is_ortagonal
+        println("Собственные вектора ортогональны")
+    else
+        println("Собственные вектора не ортогональны")
+    end
+end
+
+A = [2.2 1 0.5 2;
+     1 1.3 2 1;
+     0.5 2 0.5 1.6;
+     2 1 1.6 2]
+A = Float64.(copy(A))
+println("Симметричная матрица A:")
+for i in 1:4
+    for j in 1:4
+        print(A[i,j], "  ")
+    end
+    println()
+end
+println()
+
+lambda_values, lambda_vectors = danilevsky_method(A)
+println("Собственные значения:")
+println(lambda_values)
+println()
+println("Собственные векторы:")
+for vec in lambda_vectors
+    println(vec)
+end
+println()
+
+check_viete(lambda_values, A)
+check_gershgorin(lambda_values, A)
+are_orthogonal(lambda_vectors)
+println()
+
+B_size = 6
+B = generate_symmetric_matrix(B_size)
+println("Симметричная матрица B:")
+for i in 1:B_size
+    for j in 1:B_size
+        print(B[i,j], "  ")
+    end
+    println()
+end
+println()
+
+lambda_values, lambda_vectors = danilevsky_method(B)
+println("Собственные значения:")
+println(lambda_values)
+println()
+println("Собственные векторы:")
+for vec in lambda_vectors
+    println(vec)
+end
+println()
+
+check_viete(lambda_values, B)
+check_gershgorin(lambda_values, B)
+are_orthogonal(lambda_vectors)
+println()
+\end{lstlisting}
+
+\section{Результаты}
+\par
+\begin{center}
+\includegraphics[scale=0.45]{g1}
+\end{center}
+\par
+
+\section{Выводы}
+В ходе выполнения лаборатороной работы был реализован метод А.М. Данилевского по вычислению собсвтвенных значений и собственных векторов. Также были реализованы проверки условий теоремы Гершгорина о принадлежности собственных значений соответствующим объединениям кругов Гершгорина и корректность вычисления собственных значений по теореме Виета. Метод был реализован для симметричных матриц произвольного размера. Корректность всех вычислений была проверена на матрице, приведённой в презентации.
+\end{document}

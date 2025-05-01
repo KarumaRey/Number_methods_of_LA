@@ -1,0 +1,292 @@
+\UseRawInputEncoding
+\documentclass[a4paper, 14pt]{extarticle}
+
+% Поля
+%--------------------------------------
+\usepackage{geometry}
+\geometry{a4paper,tmargin=2cm,bmargin=2cm,lmargin=3cm,rmargin=1cm}
+%--------------------------------------
+
+
+%Russian-specific packages
+%--------------------------------------
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc} 
+\usepackage[english, main=russian]{babel}
+%--------------------------------------
+
+\usepackage{textcomp}
+
+% Красная строка
+%--------------------------------------
+\usepackage{indentfirst}               
+%--------------------------------------             
+
+
+%Graphics
+%--------------------------------------
+\usepackage{graphicx}
+\graphicspath{ {./images/} }
+\usepackage{wrapfig}
+%--------------------------------------
+
+% Полуторный интервал
+%--------------------------------------
+\linespread{1.3}                    
+%--------------------------------------
+
+%Выравнивание и переносы
+%--------------------------------------
+% Избавляемся от переполнений
+\sloppy
+% Запрещаем разрыв страницы после первой строки абзаца
+\clubpenalty=10000
+% Запрещаем разрыв страницы после последней строки абзаца
+\widowpenalty=10000
+%--------------------------------------
+
+%Списки
+\usepackage{enumitem}
+
+%Подписи
+\usepackage{caption} 
+
+%Гиперссылки
+\usepackage{hyperref}
+
+\hypersetup {
+	unicode=true
+}
+
+%Рисунки
+%--------------------------------------
+\DeclareCaptionLabelSeparator*{emdash}{~--- }
+\captionsetup[figure]{labelsep=emdash,font=onehalfspacing,position=bottom}
+%--------------------------------------
+
+\usepackage{tempora}
+\usepackage{amsmath}
+\usepackage{color}
+\usepackage{listings}
+\lstset{
+  belowcaptionskip=1\baselineskip,
+  breaklines=true,
+  frame=L,
+  xleftmargin=\parindent,
+  language=Python,
+  showstringspaces=false,
+  basicstyle=\footnotesize\ttfamily,
+  keywordstyle=\bfseries\color{blue},
+  commentstyle=\itshape\color{purple},
+  identifierstyle=\color{black},
+  stringstyle=\color{red},
+  extendedchars=\true,
+}
+
+%--------------------------------------
+%			НАЧАЛО ДОКУМЕНТА
+%--------------------------------------
+
+\begin{document}
+
+%--------------------------------------
+%			ТИТУЛЬНЫЙ ЛИСТ
+%--------------------------------------
+\begin{titlepage}
+\thispagestyle{empty}
+\newpage
+
+
+%Шапка титульного листа
+%--------------------------------------
+\vspace*{-60pt}
+\hspace{-65pt}
+\begin{minipage}{0.3\textwidth}
+\hspace*{-20pt}\centering
+\includegraphics[width=\textwidth]{emblem}
+\end{minipage}
+\begin{minipage}{0.67\textwidth}\small \textbf{
+\vspace*{-0.7ex}
+\hspace*{-6pt}\centerline{Министерство науки и высшего образования Российской Федерации}
+\vspace*{-0.7ex}
+\centerline{Федеральное государственное бюджетное образовательное учреждение }
+\vspace*{-0.7ex}
+\centerline{высшего образования}
+\vspace*{-0.7ex}
+\centerline{<<Московский государственный технический университет}
+\vspace*{-0.7ex}
+\centerline{имени Н.Э. Баумана}
+\vspace*{-0.7ex}
+\centerline{(национальный исследовательский университет)>>}
+\vspace*{-0.7ex}
+\centerline{(МГТУ им. Н.Э. Баумана)}}
+\end{minipage}
+%--------------------------------------
+
+%Полосы
+%--------------------------------------
+\vspace{-25pt}
+\hspace{-35pt}\rule{\textwidth}{2.3pt}
+
+\vspace*{-20.3pt}
+\hspace{-35pt}\rule{\textwidth}{0.4pt}
+%--------------------------------------
+
+\vspace{1.5ex}
+\hspace{-35pt} \noindent \small ФАКУЛЬТЕТ\hspace{80pt} <<Информатика и системы управления>>
+
+\vspace*{-16pt}
+\hspace{47pt}\rule{0.83\textwidth}{0.4pt}
+
+\vspace{0.5ex}
+\hspace{-35pt} \noindent \small КАФЕДРА\hspace{50pt} <<Теоретическая информатика и компьютерные технологии>>
+
+\vspace*{-16pt}
+\hspace{30pt}\rule{0.866\textwidth}{0.4pt}
+  
+\vspace{11em}
+
+\begin{center}
+\Large {\bf Лабораторная работа № 10} \\ 
+\large {\bf<<Реализация метода А.А. Карацубы>>} \\ 
+\large {\bf по курсу <<Численные методы линейной алгебры>>} \\ 
+\end{center}\normalsize
+
+\vspace{8em}
+
+
+\begin{flushright}
+  {Студент группы ИУ9-71Б Лысенко В. В.\hspace*{15pt} \\
+  \vspace{2ex}
+  Преподаватель Посевин Д. П.\hspace*{15pt}}
+\end{flushright}
+
+\bigskip
+
+\vfill
+ 
+
+\begin{center}
+\textsl{Москва 2024}
+\end{center}
+\end{titlepage}
+%--------------------------------------
+%		КОНЕЦ ТИТУЛЬНОГО ЛИСТА
+%--------------------------------------
+
+\renewcommand{\ttdefault}{pcr}
+
+\setlength{\tabcolsep}{3pt}
+\newpage
+\setcounter{page}{2}
+
+\section{Цель работы}\label{Sect::task}
+\par
+\renewcommand{\labelenumii}{\arabic{enumi}.\arabic{enumii}.}
+Реализовать метод А.А. Карацубы для перемножения длинных чисел.
+
+\section{Задачи}\label{Sect::task}
+\par
+\renewcommand{\labelenumii}{\arabic{enumi}.\arabic{enumii}.}
+\begin{enumerate} 
+    \item Сгенерировать пары чисел размерности $2^{n}$, где n меняется от 1 до 15 (условно).
+    \item Перемножить числа обычным методом и методом Карацубы.
+    \item Сравнить время работы алгоритмов.
+\end{enumerate}
+
+\pagebreak
+\section{Практическая реализация}
+
+\par
+Код программы:
+\begin{lstlisting}
+using Random
+using Plots
+
+function random_number_array(n)
+    return rand(0:9, n)
+end
+
+
+function standard_multiplication(x, y)
+    n = length(x)
+    result = zeros(Int, 2n)
+    for i in 1:n
+        carry = 0
+        for j in 1:n
+            result[i + j - 1] += x[i] * y[j] + carry
+            carry = div(result[i + j - 1], 10)
+            result[i + j - 1] = mod(result[i + j - 1], 10)
+        end
+        result[i + n] += carry
+    end
+    return result
+end
+
+
+function karatsuba(x, y)
+    n = length(x)
+
+    if n < 4
+        return standard_multiplication(x, y)
+    end
+
+    m = div(n, 2)
+
+    x1, x0 = x[1:m], x[m+1:end]
+    y1, y0 = y[1:m], y[m+1:end]
+
+    z2 = karatsuba(x1, y1)
+    z0 = karatsuba(x0, y0)
+
+    x1x0 = [x1[i] + x0[i] for i in 1:m]
+    y1y0 = [y1[i] + y0[i] for i in 1:m]
+
+    z1 = karatsuba(x1x0, y1y0)
+
+    for i in 1:length(z2)
+        z1[i] -= z2[i] + z0[i]
+    end
+
+    result = zeros(Int, 2n)
+
+    for i in 1:length(z2)
+        result[i] += z2[i]
+        result[i + m] += z1[i]
+        result[i + 2m] += z0[i]
+    end
+
+    return result
+end
+
+sizes = [2^i for i in 1:15]
+std_times = Float64[]
+karatsuba_times = Float64[]
+
+for n in sizes
+    x_arr = random_number_array(n)
+    y_arr = random_number_array(n)
+
+    std_time = @elapsed standard_multiplication(x_arr, y_arr)
+    push!(std_times, std_time)
+
+    karatsuba_time = @elapsed karatsuba(x_arr, y_arr)
+    push!(karatsuba_times, karatsuba_time)
+end
+
+plot(sizes, std_times, label="Обычное умножение", xlabel="Количество разрядов (2^n)", ylabel="Время, с", legend=:topright, title="Сравнение сложности умножения") 
+plot!(sizes, karatsuba_times, label="Алгоритм Карацубы", linestyle=:dash)
+\end{lstlisting}
+
+\section{Результаты}
+\par
+Результат выполнения программы:
+\begin{center}
+\includegraphics[scale=0.7]{g1}
+\end{center}
+\par
+
+
+\section{Выводы}
+В ходе выполнения лаборатороной работы был реализован метод А.А. Карацубы для перемножения чисел большой размерности. Сравнение с обычным умножением показало, что метод Карацубы действительно отрабатывает гораздо быстрее на больших показателях длины чисел.
+\end{document}

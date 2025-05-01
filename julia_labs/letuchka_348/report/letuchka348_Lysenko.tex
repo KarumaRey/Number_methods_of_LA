@@ -1,0 +1,324 @@
+\UseRawInputEncoding
+\documentclass[a4paper, 14pt]{extarticle}
+
+% Поля
+%--------------------------------------
+\usepackage{geometry}
+\geometry{a4paper,tmargin=2cm,bmargin=2cm,lmargin=3cm,rmargin=1cm}
+%--------------------------------------
+
+
+%Russian-specific packages
+%--------------------------------------
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc} 
+\usepackage[english, main=russian]{babel}
+%--------------------------------------
+
+\usepackage{textcomp}
+
+% Красная строка
+%--------------------------------------
+\usepackage{indentfirst}               
+%--------------------------------------             
+
+
+%Graphics
+%--------------------------------------
+\usepackage{graphicx}
+\graphicspath{ {./images/} }
+\usepackage{wrapfig}
+%--------------------------------------
+
+% Полуторный интервал
+%--------------------------------------
+\linespread{1.3}                    
+%--------------------------------------
+
+%Выравнивание и переносы
+%--------------------------------------
+% Избавляемся от переполнений
+\sloppy
+% Запрещаем разрыв страницы после первой строки абзаца
+\clubpenalty=10000
+% Запрещаем разрыв страницы после последней строки абзаца
+\widowpenalty=10000
+%--------------------------------------
+
+%Списки
+\usepackage{enumitem}
+
+%Подписи
+\usepackage{caption} 
+
+%Гиперссылки
+\usepackage{hyperref}
+
+\hypersetup {
+	unicode=true
+}
+
+%Рисунки
+%--------------------------------------
+\DeclareCaptionLabelSeparator*{emdash}{~--- }
+\captionsetup[figure]{labelsep=emdash,font=onehalfspacing,position=bottom}
+%--------------------------------------
+
+\usepackage{tempora}
+\usepackage{amsmath}
+\usepackage{color}
+\usepackage{listings}
+\lstset{
+  belowcaptionskip=1\baselineskip,
+  breaklines=true,
+  frame=L,
+  xleftmargin=\parindent,
+  language=Python,
+  showstringspaces=false,
+  basicstyle=\footnotesize\ttfamily,
+  keywordstyle=\bfseries\color{blue},
+  commentstyle=\itshape\color{purple},
+  identifierstyle=\color{black},
+  stringstyle=\color{red},
+  extendedchars=\true,
+}
+
+%--------------------------------------
+%			НАЧАЛО ДОКУМЕНТА
+%--------------------------------------
+
+\begin{document}
+
+%--------------------------------------
+%			ТИТУЛЬНЫЙ ЛИСТ
+%--------------------------------------
+\begin{titlepage}
+\thispagestyle{empty}
+\newpage
+
+
+%Шапка титульного листа
+%--------------------------------------
+\vspace*{-60pt}
+\hspace{-65pt}
+\begin{minipage}{0.3\textwidth}
+\hspace*{-20pt}\centering
+\includegraphics[width=\textwidth]{emblem}
+\end{minipage}
+\begin{minipage}{0.67\textwidth}\small \textbf{
+\vspace*{-0.7ex}
+\hspace*{-6pt}\centerline{Министерство науки и высшего образования Российской Федерации}
+\vspace*{-0.7ex}
+\centerline{Федеральное государственное бюджетное образовательное учреждение }
+\vspace*{-0.7ex}
+\centerline{высшего образования}
+\vspace*{-0.7ex}
+\centerline{<<Московский государственный технический университет}
+\vspace*{-0.7ex}
+\centerline{имени Н.Э. Баумана}
+\vspace*{-0.7ex}
+\centerline{(национальный исследовательский университет)>>}
+\vspace*{-0.7ex}
+\centerline{(МГТУ им. Н.Э. Баумана)}}
+\end{minipage}
+%--------------------------------------
+
+%Полосы
+%--------------------------------------
+\vspace{-25pt}
+\hspace{-35pt}\rule{\textwidth}{2.3pt}
+
+\vspace*{-20.3pt}
+\hspace{-35pt}\rule{\textwidth}{0.4pt}
+%--------------------------------------
+
+\vspace{1.5ex}
+\hspace{-35pt} \noindent \small ФАКУЛЬТЕТ\hspace{80pt} <<Информатика и системы управления>>
+
+\vspace*{-16pt}
+\hspace{47pt}\rule{0.83\textwidth}{0.4pt}
+
+\vspace{0.5ex}
+\hspace{-35pt} \noindent \small КАФЕДРА\hspace{50pt} <<Теоретическая информатика и компьютерные технологии>>
+
+\vspace*{-16pt}
+\hspace{30pt}\rule{0.866\textwidth}{0.4pt}
+  
+\vspace{11em}
+
+\begin{center}
+\Large {\bf Летучка № 348} \\ 
+\large {\bf<<Реализация алгоритма LU-разложения матрицы>>} \\ 
+\large {\bf по курсу <<Численные методы линейной алгебры>>} \\ 
+\end{center}\normalsize
+
+\vspace{8em}
+
+
+\begin{flushright}
+  {Студент группы ИУ9-71Б Лысенко В. В.\hspace*{15pt} \\
+  \vspace{2ex}
+  Преподаватель Посевин Д. П.\hspace*{15pt}}
+\end{flushright}
+
+\bigskip
+
+\vfill
+ 
+
+\begin{center}
+\textsl{Москва 2024}
+\end{center}
+\end{titlepage}
+%--------------------------------------
+%		КОНЕЦ ТИТУЛЬНОГО ЛИСТА
+%--------------------------------------
+
+\renewcommand{\ttdefault}{pcr}
+
+\setlength{\tabcolsep}{3pt}
+\newpage
+\setcounter{page}{2}
+
+\section{Цель работы}\label{Sect::task}
+\par
+\renewcommand{\labelenumii}{\arabic{enumi}.\arabic{enumii}.}
+Реализовать алгоритм LU-разложения. (2 вариант)
+
+\section{Практическая реализация}
+\par
+Матрица А, задаваемого размера, генерируется случайным образом и выводится на экран. Функция LU-decomp() реализует LU-разложение и на выходе даёт две треугольные матрицы. Для проверки эти матрицы перемножаются, и результат выводится на экран.
+\par
+Ниже представлен код программы:
+\begin{lstlisting}
+#include <iostream>
+#include <vector>
+#include <random>
+#include <math.h>
+
+using namespace std;
+
+vector<vector<double>> generateArray(int n) {
+    vector<vector<double>> A(n, vector<double>(n, 0));
+    random_device rd;
+    mt19937 gen(rd());
+    uniform_real_distribution<double> dis(1, 20);
+
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++) {
+            A[i][j] = dis(gen);
+        }
+    }
+
+    return A;
+}
+
+void LU_decomp(vector<vector<double>> A, vector<vector<double>>& L, vector<vector<double>>& U) {
+    int n = A.size();
+    for (int i = 0; i < n; i++) {
+        
+        for (int k = i; k < n; k++) {
+            
+            double sum = 0;
+            for (int j = 0; j < i; j++)
+                sum += L[i][j] * U[j][k];
+            U[i][k] = A[i][k] - sum;
+        }
+        for (int k = i; k < n; k++) {
+            
+            if (i == k)
+                L[i][i] = 1;
+            else {
+                double sum = 0;
+                for (int j = 0; j < i; j++)
+                    sum += L[k][j] * U[j][i];
+                L[k][i] = (A[k][i] - sum) / U[i][i];
+                
+            }
+        }
+        
+    }
+}
+
+
+
+int main() {
+    // vector<vector<double>> 
+    // A = {{1, 2, 3},
+    //  {4, 5, 6}, 
+    //  {7, 8, 9}};
+    // int n = A.size();
+
+    int n = 5;
+
+    vector<vector<double>> A = generateArray(n);
+
+
+    cout << "Матрица A:" << endl;
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++) {
+            cout << A[i][j] << " ";
+        }
+        cout << endl;
+    }
+    cout << endl;
+
+    vector<vector<double>> L(n, vector<double>(n, 0));
+    vector<vector<double>> U(n, vector<double>(n, 0));
+    LU_decomp(A, L, U);
+
+    cout << "Матрица L:" << endl;
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++) {
+            cout << L[i][j] << " ";
+        }
+        cout << endl;
+    }
+    cout << endl;
+
+    cout << "Матрица U:" << endl;
+    
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++) {
+            cout << U[i][j] << " ";
+        }
+        cout << endl;
+    }
+    cout << endl;
+
+
+    vector<vector<double>> A_check(n, vector<double>(n, 0));
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++) {
+            double sum = 0;
+            for (int k = 0; k < n; k++) {
+                sum += L[i][k] * U[k][j];
+            }
+            A_check[i][j] = sum;
+        }
+    }
+
+    cout << "Проверка LU-разложения:" << endl;
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++) {
+            cout << A_check[i][j] << " ";
+        }
+        cout << endl;
+    }
+
+
+    return 0;
+}
+\end{lstlisting}
+
+\section{Результаты}
+\par
+\begin{center}
+\includegraphics[scale=0.65]{g1}
+\end{center}
+\par
+
+
+\section{Выводы}
+В ходе задания был реализован алгоритм LU-разложения матрицы. Результат алгоритма был проверен и успешно сверен с изнчальной матрицой.
+\end{document}

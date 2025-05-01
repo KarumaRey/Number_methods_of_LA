@@ -1,0 +1,55 @@
+Determining if the function sgemm_ exists failed with the following output:
+Change Dir: /home/rey/7_semester/number_methods/lapack_example/cmake-build-debug/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_75f0d/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_75f0d.dir/build.make CMakeFiles/cmTC_75f0d.dir/build
+gmake[1]: вход в каталог «/home/rey/7_semester/number_methods/lapack_example/cmake-build-debug/CMakeFiles/CMakeTmp»
+Building C object CMakeFiles/cmTC_75f0d.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=sgemm_ -o CMakeFiles/cmTC_75f0d.dir/CheckFunctionExists.c.o -c /usr/share/cmake-3.22/Modules/CheckFunctionExists.c
+Linking C executable cmTC_75f0d
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_75f0d.dir/link.txt --verbose=1
+/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=sgemm_ CMakeFiles/cmTC_75f0d.dir/CheckFunctionExists.c.o -o cmTC_75f0d 
+/usr/bin/ld: CMakeFiles/cmTC_75f0d.dir/CheckFunctionExists.c.o: в функции «main»:
+CheckFunctionExists.c:(.text+0x14): неопределённая ссылка на «sgemm_»
+collect2: error: ld returned 1 exit status
+gmake[1]: *** [CMakeFiles/cmTC_75f0d.dir/build.make:99: cmTC_75f0d] Ошибка 1
+gmake[1]: выход из каталога «/home/rey/7_semester/number_methods/lapack_example/cmake-build-debug/CMakeFiles/CMakeTmp»
+gmake: *** [Makefile:127: cmTC_75f0d/fast] Ошибка 2
+
+
+
+Determining if the function cheev_ exists failed with the following output:
+Change Dir: /home/rey/7_semester/number_methods/lapack_example/cmake-build-debug/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_d063c/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_d063c.dir/build.make CMakeFiles/cmTC_d063c.dir/build
+gmake[1]: вход в каталог «/home/rey/7_semester/number_methods/lapack_example/cmake-build-debug/CMakeFiles/CMakeTmp»
+Building C object CMakeFiles/cmTC_d063c.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=cheev_ -o CMakeFiles/cmTC_d063c.dir/CheckFunctionExists.c.o -c /usr/share/cmake-3.22/Modules/CheckFunctionExists.c
+Linking C executable cmTC_d063c
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_d063c.dir/link.txt --verbose=1
+/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=cheev_ CMakeFiles/cmTC_d063c.dir/CheckFunctionExists.c.o -o cmTC_d063c  /usr/lib/x86_64-linux-gnu/libblas.so -lm -ldl 
+/usr/bin/ld: CMakeFiles/cmTC_d063c.dir/CheckFunctionExists.c.o: в функции «main»:
+CheckFunctionExists.c:(.text+0x14): неопределённая ссылка на «cheev_»
+collect2: error: ld returned 1 exit status
+gmake[1]: *** [CMakeFiles/cmTC_d063c.dir/build.make:100: cmTC_d063c] Ошибка 1
+gmake[1]: выход из каталога «/home/rey/7_semester/number_methods/lapack_example/cmake-build-debug/CMakeFiles/CMakeTmp»
+gmake: *** [Makefile:127: cmTC_d063c/fast] Ошибка 2
+
+
+
+Determining if the function cheev_ exists failed with the following output:
+Change Dir: /home/rey/7_semester/number_methods/lapack_example/cmake-build-debug/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_5e1d2/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_5e1d2.dir/build.make CMakeFiles/cmTC_5e1d2.dir/build
+gmake[1]: вход в каталог «/home/rey/7_semester/number_methods/lapack_example/cmake-build-debug/CMakeFiles/CMakeTmp»
+Building C object CMakeFiles/cmTC_5e1d2.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=cheev_ -o CMakeFiles/cmTC_5e1d2.dir/CheckFunctionExists.c.o -c /usr/share/cmake-3.22/Modules/CheckFunctionExists.c
+Linking C executable cmTC_5e1d2
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_5e1d2.dir/link.txt --verbose=1
+/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=cheev_ CMakeFiles/cmTC_5e1d2.dir/CheckFunctionExists.c.o -o cmTC_5e1d2  /usr/lib/x86_64-linux-gnu/liblapack.so /usr/lib/x86_64-linux-gnu/libblas.so -fortranlibs 
+cc: error: unrecognized command-line option ‘-fortranlibs’
+gmake[1]: *** [CMakeFiles/cmTC_5e1d2.dir/build.make:101: cmTC_5e1d2] Ошибка 1
+gmake[1]: выход из каталога «/home/rey/7_semester/number_methods/lapack_example/cmake-build-debug/CMakeFiles/CMakeTmp»
+gmake: *** [Makefile:127: cmTC_5e1d2/fast] Ошибка 2
+
+
+

@@ -1,0 +1,291 @@
+\documentclass[a4paper, 14pt]{extarticle}
+
+% Поля
+%--------------------------------------
+\usepackage{geometry}
+\geometry{a4paper,tmargin=2cm,bmargin=2cm,lmargin=3cm,rmargin=1cm}
+%--------------------------------------
+
+
+%Russian-specific packages
+%--------------------------------------
+
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc} 
+\usepackage[english, main=russian]{babel}
+%--------------------------------------
+
+\usepackage{textcomp}
+
+% Красная строка
+%--------------------------------------
+\usepackage{indentfirst}               
+%--------------------------------------             
+
+
+%Graphics
+%--------------------------------------
+\usepackage{graphicx}
+\graphicspath{ {./images/} }
+\usepackage{wrapfig}
+%--------------------------------------
+
+% Полуторный интервал
+%--------------------------------------
+\linespread{1.3}                    
+%--------------------------------------
+
+%Выравнивание и переносы
+%--------------------------------------
+% Избавляемся от переполнений
+\sloppy
+% Запрещаем разрыв страницы после первой строки абзаца
+\clubpenalty=10000
+% Запрещаем разрыв страницы после последней строки абзаца
+\widowpenalty=10000
+%--------------------------------------
+
+%Списки
+\usepackage{enumitem}
+
+%Подписи
+\usepackage{caption} 
+
+%Гиперссылки
+\usepackage{hyperref}
+
+\hypersetup {
+	unicode=true
+}
+
+%Рисунки
+%--------------------------------------
+\DeclareCaptionLabelSeparator*{emdash}{~--- }
+\captionsetup[figure]{labelsep=emdash,font=onehalfspacing,position=bottom}
+%--------------------------------------
+
+
+\usepackage{tempora}
+\usepackage{amsmath}
+\usepackage{color}
+\usepackage{listings}
+\lstset{
+  belowcaptionskip=1\baselineskip,
+  breaklines=true,
+  frame=L,
+  xleftmargin=\parindent,
+  language=Python,
+  showstringspaces=false,
+  basicstyle=\footnotesize\ttfamily,
+  keywordstyle=\bfseries\color{blue},
+  commentstyle=\itshape\color{purple},
+  identifierstyle=\color{black},
+  stringstyle=\color{red},
+}
+
+%--------------------------------------
+%			НАЧАЛО ДОКУМЕНТА
+%--------------------------------------
+
+\begin{document}
+
+%--------------------------------------
+%			ТИТУЛЬНЫЙ ЛИСТ
+%--------------------------------------
+\begin{titlepage}
+\thispagestyle{empty}
+\newpage
+
+
+%Шапка титульного листа
+%--------------------------------------
+\vspace*{-60pt}
+\hspace{-65pt}
+\begin{minipage}{0.3\textwidth}
+\hspace*{-20pt}\centering
+\includegraphics[width=\textwidth]{emblem}
+\end{minipage}
+\begin{minipage}{0.67\textwidth}\small \textbf{
+\vspace*{-0.7ex}
+\hspace*{-6pt}\centerline{Министерство науки и высшего образования Российской Федерации}
+\vspace*{-0.7ex}
+\centerline{Федеральное государственное бюджетное образовательное учреждение }
+\vspace*{-0.7ex}
+\centerline{высшего образования}
+\vspace*{-0.7ex}
+\centerline{<<Московский государственный технический университет}
+\vspace*{-0.7ex}
+\centerline{имени Н.Э. Баумана}
+\vspace*{-0.7ex}
+\centerline{(национальный исследовательский университет)>>}
+\vspace*{-0.7ex}
+\centerline{(МГТУ им. Н.Э. Баумана)}}
+\end{minipage}
+%--------------------------------------
+
+%Полосы
+%--------------------------------------
+\vspace{-25pt}
+\hspace{-35pt}\rule{\textwidth}{2.3pt}
+
+\vspace*{-20.3pt}
+\hspace{-35pt}\rule{\textwidth}{0.4pt}
+%--------------------------------------
+
+\vspace{1.5ex}
+\hspace{-35pt} \noindent \small ФАКУЛЬТЕТ\hspace{80pt} <<Информатика и системы управления>>
+
+\vspace*{-16pt}
+\hspace{47pt}\rule{0.83\textwidth}{0.4pt}
+
+\vspace{0.5ex}
+\hspace{-35pt} \noindent \small КАФЕДРА\hspace{50pt} <<Теоретическая информатика и компьютерные технологии>>
+
+\vspace*{-16pt}
+\hspace{30pt}\rule{0.866\textwidth}{0.4pt}
+  
+\vspace{11em}
+
+\begin{center}
+\Large {\bf Задача <<Метод прогонки>>} \\ 
+\large {\bf по курсу <<Численные методы линейной алгебры>>} \\ 
+\end{center}\normalsize
+
+\vspace{8em}
+
+
+\begin{flushright}
+  {Студент группы ИУ9-71Б Лысенко В. В.\hspace*{15pt} \\
+  \vspace{2ex}
+  Преподаватель Посевин Д. П.\hspace*{15pt}}
+\end{flushright}
+
+\bigskip
+
+\vfill
+ 
+
+\begin{center}
+\textsl{Москва 2024}
+\end{center}
+\end{titlepage}
+%--------------------------------------
+%		КОНЕЦ ТИТУЛЬНОГО ЛИСТА
+%--------------------------------------
+
+\renewcommand{\ttdefault}{pcr}
+
+\setlength{\tabcolsep}{3pt}
+\newpage
+\setcounter{page}{2}
+
+\section{Задачи}\label{Sect::task}
+\par
+\renewcommand{\labelenumii}{\arabic{enumi}.\arabic{enumii}.}
+\begin{enumerate} 
+Реализовать метод прогонки и вычислить погрешность.
+\end{enumerate}
+
+
+\section{Практическая реализация}
+\par
+
+Функция progonka() решает систему линейных алгебраических уравнений с трехдиагональной матрицей. Она принимает четыре вектора a, b, c и f как входные параметры, где a, b, c представлюят элементы трёх диагоналей соответственно, а f - результирующий вектор.
+\par
+Внутри функции progonka() создается два вектора p и q длиной n, которые используются для хранения промежуточных результатов.
+\par
+Функция norm() вычисляет евклидову норму вектора x, полученного методомм прогонки, а функция err() вычисляет погрешность.
+
+\par
+Код программы представлен ниже:
+\begin{lstlisting}
+n = 1000
+
+function progonka(a, b, c, d)
+
+    p = zeros(n)
+    q = zeros(n)
+
+    p[1] = c[1] / b[1]
+    q[1] = f[1] / b[1]
+    for i in 2:n-1
+        k = (b[i] - p[i-1]*a[i])
+        p[i] = c[i] / k
+        q[i] = (f[i] - q[i-1]*a[i]) / k
+    end
+    q[n] = (f[n] - q[n-1]*a[n]) / (b[n] - p[n-1]*a[n])
+
+    x = zeros(n)
+    x[n] = q[n]
+    for i in n-1:-1:1
+        x[i] = q[i] - p[i]*x[i+1]
+    end
+    
+    return x
+end
+
+function norm(x)
+    sum = 0.0
+    for element in x
+        sum += element^2
+    end
+    return sqrt(sum)
+end
+
+function err(a, b, c, f, x)
+    f1 = zeros(n)
+    f1[1] = b[1] * x[1] + c[1] * x[2]
+    f1[n] = a[n] * x[n-1] + b[n] * x[n]
+    for i in 2:n-1
+        f1[i] = a[i] * x[i-1] + b[i] * x[i] + c[i] * x[i+1]
+    end
+    
+    for i in 1:n
+       # print(f1[i], " ")
+    end
+    println()
+    
+    return norm(f1 - f)
+end
+
+a = zeros(n)
+b = zeros(n)
+c = zeros(n)
+a[n] = 1.0
+c[1] = 1.0
+b[1] = 4.0
+b[n] = 4.0
+for i in 2:n-1
+    a[i] = 1.0
+    b[i] = 4.0
+    c[i] = 1.0
+end
+
+f = zeros(n)
+#f[1:4] = [5.0, 6.0, 6.0, 5.0]
+f[1] = 5.0
+f[n] = 5.0
+for i in 2:n-1
+    f[i] = 6.0
+end
+
+
+x = progonka(a, b, c, f)
+for i in 1:n
+    #print(x[i], " ")
+end
+println()
+
+error = err(a, b, c, f, x)
+println("Error: ", error)
+\end{lstlisting}
+
+\section{Результат}
+\begin{center}
+\includegraphics[scale=0.75]{g1}
+\par
+\end{center}
+
+\section{Выводы}
+В данной лабораторной работе был реализован метод прогонки и получена погрешность вычислений.
+\end{document}

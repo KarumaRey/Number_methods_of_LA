@@ -1,0 +1,357 @@
+\documentclass[a4paper, 14pt]{extarticle}
+
+% Поля
+%--------------------------------------
+\usepackage{geometry}
+\geometry{a4paper,tmargin=2cm,bmargin=2cm,lmargin=3cm,rmargin=1cm}
+%--------------------------------------
+
+
+%Russian-specific packages
+%--------------------------------------
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc} 
+\usepackage[english, main=russian]{babel}
+%--------------------------------------
+
+\usepackage{textcomp}
+
+% Красная строка
+%--------------------------------------
+\usepackage{indentfirst}               
+%--------------------------------------             
+
+
+%Graphics
+%--------------------------------------
+\usepackage{graphicx}
+\graphicspath{ {./images/} }
+\usepackage{wrapfig}
+%--------------------------------------
+
+% Полуторный интервал
+%--------------------------------------
+\linespread{1.3}                    
+%--------------------------------------
+
+%Выравнивание и переносы
+%--------------------------------------
+% Избавляемся от переполнений
+\sloppy
+% Запрещаем разрыв страницы после первой строки абзаца
+\clubpenalty=10000
+% Запрещаем разрыв страницы после последней строки абзаца
+\widowpenalty=10000
+%--------------------------------------
+
+%Списки
+\usepackage{enumitem}
+
+%Подписи
+\usepackage{caption} 
+
+%Гиперссылки
+\usepackage{hyperref}
+
+\hypersetup {
+	unicode=true
+}
+
+%Рисунки
+%--------------------------------------
+\DeclareCaptionLabelSeparator*{emdash}{~--- }
+\captionsetup[figure]{labelsep=emdash,font=onehalfspacing,position=bottom}
+%--------------------------------------
+
+\usepackage{tempora}
+\usepackage{amsmath}
+\usepackage{color}
+\usepackage{listings}
+\lstset{
+  belowcaptionskip=1\baselineskip,
+  breaklines=true,
+  frame=L,
+  xleftmargin=\parindent,
+  language=Python,
+  showstringspaces=false,
+  basicstyle=\footnotesize\ttfamily,
+  keywordstyle=\bfseries\color{blue},
+  commentstyle=\itshape\color{purple},
+  identifierstyle=\color{black},
+  stringstyle=\color{red},
+}
+
+%--------------------------------------
+%			НАЧАЛО ДОКУМЕНТА
+%--------------------------------------
+
+\begin{document}
+
+%--------------------------------------
+%			ТИТУЛЬНЫЙ ЛИСТ
+%--------------------------------------
+\begin{titlepage}
+\thispagestyle{empty}
+\newpage
+
+
+%Шапка титульного листа
+%--------------------------------------
+\vspace*{-60pt}
+\hspace{-65pt}
+\begin{minipage}{0.3\textwidth}
+\hspace*{-20pt}\centering
+\includegraphics[width=\textwidth]{emblem}
+\end{minipage}
+\begin{minipage}{0.67\textwidth}\small \textbf{
+\vspace*{-0.7ex}
+\hspace*{-6pt}\centerline{Министерство науки и высшего образования Российской Федерации}
+\vspace*{-0.7ex}
+\centerline{Федеральное государственное бюджетное образовательное учреждение }
+\vspace*{-0.7ex}
+\centerline{высшего образования}
+\vspace*{-0.7ex}
+\centerline{<<Московский государственный технический университет}
+\vspace*{-0.7ex}
+\centerline{имени Н.Э. Баумана}
+\vspace*{-0.7ex}
+\centerline{(национальный исследовательский университет)>>}
+\vspace*{-0.7ex}
+\centerline{(МГТУ им. Н.Э. Баумана)}}
+\end{minipage}
+%--------------------------------------
+
+%Полосы
+%--------------------------------------
+\vspace{-25pt}
+\hspace{-35pt}\rule{\textwidth}{2.3pt}
+
+\vspace*{-20.3pt}
+\hspace{-35pt}\rule{\textwidth}{0.4pt}
+%--------------------------------------
+
+\vspace{1.5ex}
+\hspace{-35pt} \noindent \small ФАКУЛЬТЕТ\hspace{80pt} <<Информатика и системы управления>>
+
+\vspace*{-16pt}
+\hspace{47pt}\rule{0.83\textwidth}{0.4pt}
+
+\vspace{0.5ex}
+\hspace{-35pt} \noindent \small КАФЕДРА\hspace{50pt} <<Теоретическая информатика и компьютерные технологии>>
+
+\vspace*{-16pt}
+\hspace{30pt}\rule{0.866\textwidth}{0.4pt}
+  
+\vspace{11em}
+
+\begin{center}
+\Large {\bf Лабораторная работа № 3} \\ 
+\large {\bf<<Оценка ошибки округления и ошибки в передаваемых данных>>} \\ 
+\large {\bf по курсу <<Численные методы линейной алгебры>>} \\ 
+\end{center}\normalsize
+
+\vspace{8em}
+
+
+\begin{flushright}
+  {Студент группы ИУ9-71Б Лысенко В. В.\hspace*{15pt} \\
+  \vspace{2ex}
+  Преподаватель Посевин Д. П.\hspace*{15pt}}
+\end{flushright}
+
+\bigskip
+
+\vfill
+ 
+
+\begin{center}
+\textsl{Москва 2024}
+\end{center}
+\end{titlepage}
+%--------------------------------------
+%		КОНЕЦ ТИТУЛЬНОГО ЛИСТА
+%--------------------------------------
+
+\renewcommand{\ttdefault}{pcr}
+
+\setlength{\tabcolsep}{3pt}
+\newpage
+\setcounter{page}{2}
+
+\section{Цель работы}\label{Sect::task}
+\par
+\renewcommand{\labelenumii}{\arabic{enumi}.\arabic{enumii}.}
+Реализовать автоматическое вычисление оценки относительной ошибки округления и ошибки в передаваемых данных.
+
+\section{Задачи}\label{Sect::task}
+\par
+\renewcommand{\labelenumii}{\arabic{enumi}.\arabic{enumii}.}
+\begin{enumerate} 
+    \item Реализовать автоматическое вычисление оценки относительной ошибки округления и ошибки в передаваемых данных для больших объёмов данных.
+    \item Реализовать автоматическое вычисление оценки относительной ошибки округления и ошибки в передаваемых данных для значений из индивидуального варианта. 
+    \item Сравнение вычисленных данных с полученными на бумаге.
+\end{enumerate}
+
+\pagebreak
+\section{Практическая реализация}
+\par
+Для получения ошибки округления необходима функция, с погрешностью вычисляющая вектор х в выражении Ax = f. В качестве таковой была взята функция из предыдущей лабораторной работы, реализующая классический метод Гаусса. Данный метод был переопределён таким образом, чтобы возвращать помимо вектора х ещё и g(A) (коэффициент роста).
+\par
+При вычислении ошибки передаваемых данных для получения вектора х использовались уже имеющиеся возможности языка. 
+\par
+При выдаче задания было сказано находить норму по формуле Евклида, однако в письменной работе использовалась формула равномерной нормы, поэтому в данной лабораторной работе были реализованы методы для нахождения обеих норм ( norm() и matrix-norm() - для поиска норм вектора и матрицы по Евклиду, inf-norm() и inf-matrix-norm() - для поиска равномерных норм вектора и матрицы).
+\par
+
+Ниже представлен код программы:
+\begin{lstlisting}
+n = 2
+p = 2.0
+t = 26
+cup = 100
+
+function gauss_classic(A, F)
+    max = maximum(abs.(A))
+    max_elems = zeros(Float64, n-1)
+
+    for k in 1:n-1
+        for i in k+1:n
+            factor = A[i, k] / A[k, k]
+            A[i, k:end] .-= factor * A[k, k:end]
+            F[i] -= factor * F[k]
+        end
+
+        max_elems[k] = maximum(abs.(A)) / max     
+    end
+
+    g_a = maximum(max_elems)
+
+    X = zeros(Float64, n)
+    for i in n:-1:1
+        X[i] = F[i] / A[i, i]
+        for j in i-1:-1:1
+            F[j] -= A[j, i] * X[i]
+        end
+    end
+
+    return g_a, X
+end
+
+
+function norm(x)
+    sum = 0.0
+    for element in x
+        sum += element^2
+    end
+    return sqrt(sum)
+end
+
+function matrix_norm(A)
+    sum = 0.0
+    for i in 1:n
+        for j in 1:n
+            #print(A[i, j], " ")
+            sum += A[i, j] ^ 2
+        end
+        #println()
+    end
+    return sqrt(sum)
+end
+
+function inf_norm(x)
+    return maximum(abs.(x))
+end
+
+function inf_matrix_norm(A)
+    return maximum([sum(abs.(A[i, :])) for i in 1:size(A, 1)])
+end
+
+
+
+#X = ones(Float64, n)
+#A = rand(-cup:cup, n, n)
+#A = Float64.(A)
+#F = [Float64(x) for x in (A * X)]
+
+X = [2.625 1.5]
+A = [[48.0, 340.0] [340.0, 23.0]]
+F = [636.0 927.0]
+
+
+println("---------------------------------------------------")
+
+g_A, X0 = gauss_classic(copy(A), copy(F))
+
+
+delta_X = vec(X) - X0
+
+norm_X = inf_norm(X)
+norm_delta_X = inf_norm(delta_X)
+
+error = norm_delta_X / norm_X
+
+nu_A = inf_matrix_norm(A) * inf_matrix_norm(inv(A))
+
+#println("X = ", X)
+#println("X0 = ", X0)
+#println("delta_X = ", delta_X)
+println("norm(delta_X) = ", norm_delta_X)
+
+println()
+
+println("nu(A) = ", nu_A)
+println("n = ", n)
+println("g(A) = ", g_A)
+println("p^(-t) = ", p^(-t))
+
+rounding_error = nu_A * n * g_A * (p^(Float64(-t)))
+
+println("\n", error,  " <= ", rounding_error, "\t<--- rounding_error")
+println("---------------------------------------------------")
+
+A1 = copy(A)
+F1 = copy(F)
+X1 = copy(X)
+
+delta_A1 = zeros(Float64, n, n)
+delta_F1 = zeros(Float64, n)
+#delta_X1 = zeros(Float64, n)
+
+delta_A1 .+= 25
+delta_F1 .+= 2.6
+
+wrong_A1 = A1 + delta_A1
+wrong_F1 = vec(F1) + vec(delta_F1)
+
+
+X01 = wrong_A1 \ wrong_F1
+#println(X01)
+
+delta_X1 = vec(X1) - vec(X01)
+#println(delta_X1)
+nu_A1 = inf_matrix_norm(A1) * inf_matrix_norm(inv(A1))
+
+error1 = inf_norm(delta_X1) / inf_norm(X1)
+
+data_error = nu_A1 * ( inf_norm(delta_F1) / inf_norm(F1) + inf_matrix_norm(delta_A1) / inf_matrix_norm(A1))
+println("\n", error1,  " <= ", data_error, "\t<--- data_error")
+\end{lstlisting}
+
+\section{Результаты}
+\par
+Результат с данными из индивидуального варианта:
+\begin{center}
+\includegraphics[scale=0.75]{g1}
+\par
+Как видно, результаты совпали с вычисленными на бумаге.
+\end{center}
+\par
+
+Результат с большими данными (размерность матрицы и векторов 100):
+\begin{center}
+\includegraphics[scale=0.75]{g2}
+\par
+\end{center}
+
+\section{Выводы}
+В ходе выполнения лаборатороной работы было реализовано автоматическое вычисление оценки относительной ошибки округления и ошибки в передаваемых данных для больших объёмов данных. Корректность работы программы была так же протестирована на данных из индивидуального варианта, в результате чего полученный результат сошёлся с ожидаемым.
+\end{document}

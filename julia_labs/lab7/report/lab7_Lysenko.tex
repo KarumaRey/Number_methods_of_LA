@@ -1,0 +1,403 @@
+\UseRawInputEncoding
+\documentclass[a4paper, 14pt]{extarticle}
+
+% Поля
+%--------------------------------------
+\usepackage{geometry}
+\geometry{a4paper,tmargin=2cm,bmargin=2cm,lmargin=3cm,rmargin=1cm}
+%--------------------------------------
+
+
+%Russian-specific packages
+%--------------------------------------
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc} 
+\usepackage[english, main=russian]{babel}
+%--------------------------------------
+
+\usepackage{textcomp}
+
+% Красная строка
+%--------------------------------------
+\usepackage{indentfirst}               
+%--------------------------------------             
+
+
+%Graphics
+%--------------------------------------
+\usepackage{graphicx}
+\graphicspath{ {./images/} }
+\usepackage{wrapfig}
+%--------------------------------------
+
+% Полуторный интервал
+%--------------------------------------
+\linespread{1.3}                    
+%--------------------------------------
+
+%Выравнивание и переносы
+%--------------------------------------
+% Избавляемся от переполнений
+\sloppy
+% Запрещаем разрыв страницы после первой строки абзаца
+\clubpenalty=10000
+% Запрещаем разрыв страницы после последней строки абзаца
+\widowpenalty=10000
+%--------------------------------------
+
+%Списки
+\usepackage{enumitem}
+
+%Подписи
+\usepackage{caption} 
+
+%Гиперссылки
+\usepackage{hyperref}
+
+\hypersetup {
+	unicode=true
+}
+
+%Рисунки
+%--------------------------------------
+\DeclareCaptionLabelSeparator*{emdash}{~--- }
+\captionsetup[figure]{labelsep=emdash,font=onehalfspacing,position=bottom}
+%--------------------------------------
+
+\usepackage{tempora}
+\usepackage{amsmath}
+\usepackage{color}
+\usepackage{listings}
+\lstset{
+  belowcaptionskip=1\baselineskip,
+  breaklines=true,
+  frame=L,
+  xleftmargin=\parindent,
+  language=Python,
+  showstringspaces=false,
+  basicstyle=\footnotesize\ttfamily,
+  keywordstyle=\bfseries\color{blue},
+  commentstyle=\itshape\color{purple},
+  identifierstyle=\color{black},
+  stringstyle=\color{red},
+  extendedchars=\true,
+}
+
+%--------------------------------------
+%			НАЧАЛО ДОКУМЕНТА
+%--------------------------------------
+
+\begin{document}
+
+%--------------------------------------
+%			ТИТУЛЬНЫЙ ЛИСТ
+%--------------------------------------
+\begin{titlepage}
+\thispagestyle{empty}
+\newpage
+
+
+%Шапка титульного листа
+%--------------------------------------
+\vspace*{-60pt}
+\hspace{-65pt}
+\begin{minipage}{0.3\textwidth}
+\hspace*{-20pt}\centering
+\includegraphics[width=\textwidth]{emblem}
+\end{minipage}
+\begin{minipage}{0.67\textwidth}\small \textbf{
+\vspace*{-0.7ex}
+\hspace*{-6pt}\centerline{Министерство науки и высшего образования Российской Федерации}
+\vspace*{-0.7ex}
+\centerline{Федеральное государственное бюджетное образовательное учреждение }
+\vspace*{-0.7ex}
+\centerline{высшего образования}
+\vspace*{-0.7ex}
+\centerline{<<Московский государственный технический университет}
+\vspace*{-0.7ex}
+\centerline{имени Н.Э. Баумана}
+\vspace*{-0.7ex}
+\centerline{(национальный исследовательский университет)>>}
+\vspace*{-0.7ex}
+\centerline{(МГТУ им. Н.Э. Баумана)}}
+\end{minipage}
+%--------------------------------------
+
+%Полосы
+%--------------------------------------
+\vspace{-25pt}
+\hspace{-35pt}\rule{\textwidth}{2.3pt}
+
+\vspace*{-20.3pt}
+\hspace{-35pt}\rule{\textwidth}{0.4pt}
+%--------------------------------------
+
+\vspace{1.5ex}
+\hspace{-35pt} \noindent \small ФАКУЛЬТЕТ\hspace{80pt} <<Информатика и системы управления>>
+
+\vspace*{-16pt}
+\hspace{47pt}\rule{0.83\textwidth}{0.4pt}
+
+\vspace{0.5ex}
+\hspace{-35pt} \noindent \small КАФЕДРА\hspace{50pt} <<Теоретическая информатика и компьютерные технологии>>
+
+\vspace*{-16pt}
+\hspace{30pt}\rule{0.866\textwidth}{0.4pt}
+  
+\vspace{11em}
+
+\begin{center}
+\Large {\bf Лабораторная работа № 7} \\ 
+\large {\bf<<Реализация методов Штраусса и Винограда и  их сравнение>>} \\ 
+\large {\bf по курсу <<Численные методы линейной алгебры>>} \\ 
+\end{center}\normalsize
+
+\vspace{8em}
+
+
+\begin{flushright}
+  {Студент группы ИУ9-71Б Лысенко В. В.\hspace*{15pt} \\
+  \vspace{2ex}
+  Преподаватель Посевин Д. П.\hspace*{15pt}}
+\end{flushright}
+
+\bigskip
+
+\vfill
+ 
+
+\begin{center}
+\textsl{Москва 2024}
+\end{center}
+\end{titlepage}
+%--------------------------------------
+%		КОНЕЦ ТИТУЛЬНОГО ЛИСТА
+%--------------------------------------
+
+\renewcommand{\ttdefault}{pcr}
+
+\setlength{\tabcolsep}{3pt}
+\newpage
+\setcounter{page}{2}
+
+\section{Цель работы}\label{Sect::task}
+\par
+\renewcommand{\labelenumii}{\arabic{enumi}.\arabic{enumii}.}
+Реализовать методы Штраусса и Винограда и сравнить их точность со стандартным алгоритмом вычисления произведения матриц. Сравнить алгоритмы по времени работы.
+
+\section{Задачи}\label{Sect::task}
+\par
+\renewcommand{\labelenumii}{\arabic{enumi}.\arabic{enumii}.}
+\begin{enumerate} 
+    \item Реализовать алгоритмы Штраусса и Винограда.
+    \item Cравнить точность методов со стандартным.
+    \item Изменить алгоритм Штраусса таким образом, чтобы для матриц с изначальным размером более 64x64 вычисления проводились классическим образом, а в ином случае - неоптимальным.
+    \item Сравнить алгоритмы по времени работы и построить соответствующий график.
+\end{enumerate}
+
+\pagebreak
+\section{Практическая реализация}
+
+\par
+Код программы:
+\begin{lstlisting}
+using LinearAlgebra
+using Plots
+
+function standard(A, B)
+    n = size(A, 1)
+    C = zeros(Float64, n, n)
+    for i in 1:n
+        for j in 1:n
+            for k in 1:n
+                C[i, j] += A[i, k] * B[k, j]
+            end
+        end
+    end
+    return C
+end
+
+
+function winograd(A, B)
+    n = size(A, 1)
+    C = zeros(Float64, n, n)
+    m = n ÷ 2
+
+    for i in 1:n
+        for j in 1:n
+            for k in 1:m
+                C[i,j] += (A[i, 2*k-1] + B[2*k,j]) * (B[2*k-1,j] + A[i, 2*k])
+                C[i,j] -= A[i, 2*k-1] * A[i, 2*k]
+                C[i,j] -= B[2*k,j] * B[2*k-1,j]
+            end
+            
+        end
+    end
+    return C
+end
+
+function strassen(A, B)
+    n = size(A, 1)
+    if n <= 64
+        return strassen_false(A, B)
+    end
+    if n > 64
+        return strassen_true(A, B)
+    end
+end
+
+function strassen_false(A, B)
+    n = size(A, 1)
+    if n <= 2
+        return standard(A, B)
+    end
+    if n % 2 != 0
+        new_size = n + 1
+        A_new = zeros(Float64, new_size, new_size)
+        B_new = zeros(Float64, new_size, new_size)
+        A_new[1:n, 1:n] = A
+        B_new[1:n, 1:n] = B
+        C_new = strassen_false(A_new, B_new)
+        return C_new[1:n, 1:n]
+    end
+
+    k = n ÷ 2
+
+    A11 = A[1:k, 1:k]
+    A12 = A[1:k, k+1:n]
+    A21 = A[k+1:n, 1:k]
+    A22 = A[k+1:n, k+1:n]
+
+    B11 = B[1:k, 1:k]
+    B12 = B[1:k, k+1:n]
+    B21 = B[k+1:n, 1:k]
+    B22 = B[k+1:n, k+1:n]
+
+    P1 = strassen_false(A11 + A22, B11 + B22)
+    P2 = strassen_false(A21 + A22, B11)
+    P3 = strassen_false(A11, B12 - B22)
+    P4 = strassen_false(A22, B21 - B11)
+    P5 = strassen_false(A11 + A12, B22)
+    P6 = strassen_false(A21 - A11, B11 + B12)
+    P7 = strassen_false(A12 - A22, B21 + B22)
+
+    C11 = P1 + P4 - P5 + P7
+    C12 = P3 + P5
+    C21 = P2 + P4
+    C22 = P1 + P3 - P2 + P6
+
+    C = zeros(Float64, n, n)
+    C[1:k, 1:k] = C11
+    C[1:k, k+1:n] = C12
+    C[k+1:n, 1:k] = C21
+    C[k+1:n, k+1:n] = C22
+
+    return C
+end
+
+function strassen_true(A, B)
+    n = size(A, 1)
+    if n <= 64
+        return standard(A, B)
+    end
+    if n % 2 != 0
+        new_size = n + 1
+        A_new = zeros(Float64, new_size, new_size)
+        B_new = zeros(Float64, new_size, new_size)
+        A_new[1:n, 1:n] = A
+        B_new[1:n, 1:n] = B
+        C_new = strassen_true(A_new, B_new)
+        return C_new[1:n, 1:n]
+    end
+
+    k = n ÷ 2
+
+    A11 = A[1:k, 1:k]
+    A12 = A[1:k, k+1:n]
+    A21 = A[k+1:n, 1:k]
+    A22 = A[k+1:n, k+1:n]
+
+    B11 = B[1:k, 1:k]
+    B12 = B[1:k, k+1:n]
+    B21 = B[k+1:n, 1:k]
+    B22 = B[k+1:n, k+1:n]
+
+    P1 = strassen_true(A11 + A22, B11 + B22)
+    P2 = strassen_true(A21 + A22, B11)
+    P3 = strassen_true(A11, B12 - B22)
+    P4 = strassen_true(A22, B21 - B11)
+    P5 = strassen_true(A11 + A12, B22)
+    P6 = strassen_true(A21 - A11, B11 + B12)
+    P7 = strassen_true(A12 - A22, B21 + B22)
+
+    C11 = P1 + P4 - P5 + P7
+    C12 = P3 + P5
+    C21 = P2 + P4
+    C22 = P1 + P3 - P2 + P6
+
+    C = zeros(Float64, n, n)
+    C[1:k, 1:k] = C11
+    C[1:k, k+1:n] = C12
+    C[k+1:n, 1:k] = C21
+    C[k+1:n, k+1:n] = C22
+
+    return C
+end
+
+
+n = 100
+A = randn(n, n)
+B = randn(n, n)
+
+standard_arr = standard(A, B)
+winograd_arr = winograd(A, B)
+strassen_arr = strassen(A, B)
+
+error_winograd = maximum(abs.(standard_arr .- winograd_arr))
+error_strassen = maximum(abs.(standard_arr .- strassen_arr))
+
+println("Погрешность алгоритма Винограда")
+println(error_winograd)
+println("Погрешность алгоритма Штрасса")
+println(error_strassen)
+
+N = 2:4:400
+standard_times = Float64[]
+winograd_times = Float64[]
+strassen_times = Float64[]
+
+for n in N
+    A = randn(n, n)
+    B = randn(n, n)
+
+    standard_t = @elapsed standard(A, B)
+    push!(standard_times, standard_t)
+
+    winograd_t = @elapsed winograd(A, B)
+    push!(winograd_times, winograd_t)
+
+    strassen_t = @elapsed strassen(A, B)
+    push!(strassen_times, strassen_t)
+end
+
+plot(N, standard_times, label="Стандартный алгоритм", xlabel="Размер матрицы N", ylabel="Время (с)", legend=:topleft)
+plot!(N, winograd_times, label="Алгоритм Винограда")
+plot!(N, strassen_times, label="Метод Штрассена")
+\end{lstlisting}
+
+\section{Результаты}
+\par
+Результат выполнения программы:
+\begin{center}
+\includegraphics[scale=0.8]{g1}
+\end{center}
+\par
+
+\begin{center}
+\includegraphics[scale=0.6]{g2}
+\end{center}
+\par
+
+\section{Выводы}
+В ходе выполнения лаборатороной работы были реализованы и сравнены по точности и времени выполнения алгоритмы Штраусса и Винограда по вычислению произведения матриц размера nxn. В результате алгоритм Штраусса показал себя наиболее эффективным и точным. На графике также налядно видно, почему на моменте разбиения матриц размерами меньше 64x64 метод Штраусса начинает проводить вычисления по стандрартному алгоритму.
+\end{document}
